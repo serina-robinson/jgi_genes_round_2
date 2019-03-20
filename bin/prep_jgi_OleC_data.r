@@ -26,7 +26,11 @@ rodeo_raw <- read_csv("data/RODEO_output_JGI_OleC/output/main_co_occur.csv") %>%
                                   pfam_id1 == "PF01370" ~ "OleD",
                                   pfam_id1 == "PF00501" ~ "OleC",
                                   TRUE ~ NA_character_)) %>%
-  dplyr::filter(grepl("Ole", ole_gene_id))
+  dplyr::filter(grepl("Ole", ole_gene_id)) %>%
+  group_by(query) %>%
+  nrow()
+
+
 
 # Get the Granulosicoccus and Mobilicoccus OleBC & D
 old_oleAs <- read_csv("data/920_OleA/main_co_occur.csv") %>%
